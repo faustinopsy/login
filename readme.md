@@ -61,4 +61,4 @@ O token será validado e, se ainda estiver válido, a resposta será positiva.
 
 ## Bônus (recursos adicionais)
 
-- Os javascripts cards e times fazem uma requição fetch para um json que esta estruturado, e o javascript ler o conteúdo e monta os cards, essa parte foi criada para mostrar a manipulação do DOM sem um banco de dados
+- Os javascripts cards e times fazem uma busca fetch para um json que está estruturado, e o javascript ler o conteúdo e monta os cards, essa parte foi criada para mostrar a manipulação do DOM sem um banco de dados
