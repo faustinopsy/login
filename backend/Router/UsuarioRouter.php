@@ -30,7 +30,7 @@ switch($_SERVER["REQUEST_METHOD"]){
     case "GET":
         $usuariosController = new UsuarioController($usuario);
         if(!isset($_GET['id'])){
-            $resultado = $usuariosController->listarUsuariosDescriptografado();
+            $resultado = $usuariosController->listarUsuarios();
             if(!$resultado){
                 echo json_encode(["status" => false, "usuarios" => $resultado,"mensagem"=>"nenhum resultado encontrado"]);
                 exit;
