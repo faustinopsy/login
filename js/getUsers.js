@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", async function() {
             container.classList.add("card");
             container.innerHTML = `
               <div class="container">
-              <h3>Dados no banco com Descriptografado</h3>
+              <h3>Dados no banco com criptografado</h3>
               <p>Id: ${usuario.id}</p>
               <h3>Nome: ${usuario.nome}</h3>
               <p>Email: ${usuario.email}</p>
