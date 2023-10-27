@@ -28,23 +28,23 @@ switch($_SERVER["REQUEST_METHOD"]){
         echo json_encode(['status' => $resultado]);
     break;
     case "GET":
-        $usuariosController = new UsuarioController($usuarios);
+        $usuariosController = new UsuarioController($usuario);
         if(!isset($_GET['id'])){
-            $resultado = $usuariosController->listarUsuarios();
+            $resultado = $usuariosController->listarUsuariosDescriptografado();
             if(!$resultado){
-                echo json_encode(["status" => false, "Usuarios" => $resultado,"mensagem"=>"nenhum resultado encontrado"]);
+                echo json_encode(["status" => false, "usuarios" => $resultado,"mensagem"=>"nenhum resultado encontrado"]);
                 exit;
             }else{
-                echo json_encode(["status" => true, "Usuarios" => $resultado]);
+                echo json_encode(["status" => true, "usuarios" => $resultado]);
                 exit;
             }
         }else{
             $resultado = $usuariosController->buscarPorEmail($id);
             if(!$resultado){
-                echo json_encode(["status" => false, "Usuarios" => $resultado,"mensagem"=>"nenhum resultado encontrado"]);
+                echo json_encode(["status" => false, "usuarios" => $resultado,"mensagem"=>"nenhum resultado encontrado"]);
                 exit;
             }else{
-                echo json_encode(["status" => true, "Usuarios" => $resultado[0]]);
+                echo json_encode(["status" => true, "usuarios" => $resultado[0]]);
                 exit;
             }
         }
