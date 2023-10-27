@@ -1,13 +1,16 @@
 <?php
 namespace App\Database;
 
+use App\Cryptonita\Crypto;
 use App\Database\Connection;
 use Exception;
 use PDO;
 use ReflectionProperty;
 class Crud extends Connection{
+    private $cripto;
     public function __construct() {
         parent::__construct();
+        $this->cripto=new Crypto();
     }
     public function getLastInsertId() {
         return $this->conn->lastInsertId();
@@ -30,11 +33,12 @@ class Crud extends Connection{
         $query = "INSERT INTO $table ($columns) VALUES ($placeholders)";
         $stmt = $this->conn->prepare($query);
         foreach ($data as $key => $value) {
-            $stmt->bindValue(":$key", $value);
+            $stmt->bindValue(":$key", $this->cripto->hidden($value));
         }
         return $stmt->execute();
     }
     public function select($object, $conditions = []) {
+        
         $reflectionClass = new \ReflectionClass($object);
         $table=$reflectionClass->getShortName();
         $query = "SELECT * FROM $table";
@@ -46,7 +50,7 @@ class Crud extends Connection{
         }
         $stmt = $this->conn->prepare($query);
         foreach ($conditions as $key => $value) {
-            $stmt->bindValue(":$key", $value);
+            $stmt->bindValue(":$key", $this->cripto->hidden($value));
         }
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -72,7 +76,7 @@ class Crud extends Connection{
         $query = "UPDATE $table SET $dataStr WHERE $conditionsStr";
         $stmt = $this->conn->prepare($query);
         foreach ($data as $key => $value) {
-            $stmt->bindValue(":$key", $value);
+            $stmt->bindValue(":$key", $this->cripto->hidden($value));
         }
         foreach ($conditions as $key => $value) {
             $stmt->bindValue(":condition_$key", $value);

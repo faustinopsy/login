@@ -6,14 +6,16 @@ use Exception;
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 use stdClass;
+use App\Cryptonita\Crypto;
 
 class UsuarioController extends Crud{
     private $usuarios;
-
+    private $cripto;
     public function __construct($usuario)
     {
         parent::__construct();
         $this->usuarios=$usuario;
+        $this->cripto=new Crypto();
     }
     public function validarToken($token){
         
@@ -33,7 +35,7 @@ class UsuarioController extends Crud{
         if (!$resultado) {
             return ['status' => false, 'message' => 'Usuário não encontrado.'];
         }
-        if (!password_verify($senha, $resultado[0]['senha'])) {
+        if (!password_verify($senha, $this->cripto->show($resultado[0]['senha']))) {
             return ['status' => false, 'message' => 'Senha incorreta.'];
         }
         $key = TOKEN;
