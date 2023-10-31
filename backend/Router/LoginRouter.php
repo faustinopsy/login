@@ -39,7 +39,7 @@ switch($_SERVER["REQUEST_METHOD"]){
                 echo json_encode(['status' => false, 'message' => $validationResponse['message']]);
                 exit;
             }
-            echo json_encode(['status' => true, 'message' => 'Token válido']);
+            echo json_encode(['status' => true, 'message' => 'Token válido','telas'=>$validationResponse['telas']]);
             exit;
             break; 
 }

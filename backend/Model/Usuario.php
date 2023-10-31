@@ -8,6 +8,7 @@ class Usuario
     private string $nome;
     private string $email;
     private string $senha;
+    private int $perfilid;
 
     public function __construct()
     {
@@ -54,5 +55,14 @@ class Usuario
     public function setSenha(string $senha): void
     {
         $this->senha = password_hash($senha, PASSWORD_DEFAULT);
+    }
+    public function getPerfilId(): int
+    {
+        return $this->perfilid;
+    }
+
+    public function setPerfilId(int $perfilid): void
+    {
+        $this->perfilid = $perfilid;
     }
 }

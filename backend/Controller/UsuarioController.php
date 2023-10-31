@@ -23,7 +23,8 @@ class UsuarioController extends Crud{
         $algoritimo = 'HS256';
         try {
             $decoded = JWT::decode($token, new Key($key, $algoritimo));
-            return ['status' => true, 'message' => 'Token válido!', 'data' => $decoded];
+            $permissoes = $decoded->telas;
+            return ['status' => true, 'message' => 'Token válido!', 'telas'=>$permissoes];
         } catch(Exception $e) {
             return ['status' => false, 'message' => 'Token inválido! Motivo: ' . $e->getMessage()];
         }
@@ -38,6 +39,7 @@ class UsuarioController extends Crud{
         if (!password_verify($senha, $this->cripto->show($resultado[0]['senha']))) {
             return ['status' => false, 'message' => 'Senha incorreta.'];
         }
+        $permissoes = $this->selectPermissoesPorPerfil($resultado[0]['perfil_id']);
         $key = TOKEN;
         $algoritimo='HS256';
             $payload = [
@@ -45,12 +47,12 @@ class UsuarioController extends Crud{
                 "aud" => "localhost",
                 "iat" => time(),
                 "exp" => time() + (60 * $checado),  
-                "sub" => $this->usuarios->getEmail()
+                "sub" => $this->usuarios->getEmail(),
+                'telas'=>$permissoes
             ];
             
             $jwt = JWT::encode($payload, $key,$algoritimo);
-           
-        return ['status' => true, 'message' => 'Login bem-sucedido!','token'=>$jwt];
+        return ['status' => true, 'message' => 'Login bem-sucedido!','token'=>$jwt,'telas'=>$permissoes];
     }
     public function adicionarUsuario(){
         return $this->insert($this->usuarios);
