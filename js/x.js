@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", async function() {
         });
 
         if (!telasPermitidas.includes(nomePaginaAtual)) {
-            alert('Você não tem permissão para acessar esta página!');
+            // alert('Você não tem permissão para acessar esta página!');
             if (telasPermitidas.length > 0) {  
                 window.location.href = telasPermitidas[0] + '.html';  
             } else {
