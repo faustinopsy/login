@@ -1,6 +1,5 @@
 document.addEventListener("DOMContentLoaded", async function() {
     const token = sessionStorage.getItem('token');
-    const nomePaginaAtual = window.location.pathname.split('/').pop().replace('.html', '');
 
     if (!token) {
         redirecioneLogin();
