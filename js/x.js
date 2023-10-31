@@ -33,7 +33,11 @@ document.addEventListener("DOMContentLoaded", async function() {
 
         if (!telasPermitidas.includes(nomePaginaAtual)) {
             alert('Você não tem permissão para acessar esta página!');
-            window.location.href = telasPermitidas+'.html';
+            if (telasPermitidas.length > 0) {  
+                window.location.href = telasPermitidas[0] + '.html';  
+            } else {
+                window.location.href = 'login.html';  
+            }
         }
 
 
