@@ -66,11 +66,29 @@ document.addEventListener("DOMContentLoaded", function() {
       if (perfilId) {
           const permissoes = await getPermissoes(perfilId);
           if (permissoes && permissoes.length) {
-              permissoes.forEach(permissao => {
-                  const li = document.createElement('li');
-                  li.textContent = permissao.nome;
-                  permissoesList.appendChild(li);
-              });
+            permissoes.forEach(permissao => {
+                const li = document.createElement('li');
+                
+                const span = document.createElement('span');
+                span.textContent = permissao.nome+ " ";
+                li.appendChild(span);
+            
+                const removeBtn = document.createElement('button');
+                removeBtn.textContent = "Remover";
+                removeBtn.addEventListener('click', async function() {
+                    const result = await deletePermissao(perfilId, permissao.nome);
+                    if (result.status) {
+                        alert('Permissão removida com sucesso!');
+                        li.remove(); 
+                    } else {
+                        alert('Erro ao remover permissão.');
+                    }
+                });
+                li.appendChild(removeBtn);
+            
+                permissoesList.appendChild(li);
+            });
+            
           } else {
               const li = document.createElement('li');
               li.textContent = "Sem permissões associadas";
@@ -94,16 +112,16 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 
 
-  document.getElementById('removePermissaoBtn').addEventListener('click', async function() {
-      const perfilId = document.getElementById('perfilSelect').value;
-      const permissaoName = document.getElementById('permissaoInput').value;
+//   document.getElementById('removePermissaoBtn').addEventListener('click', async function() {
+//       const perfilId = document.getElementById('perfilSelect').value;
+//       const permissaoName = document.getElementById('permissaoInput').value;
 
-      const result = await deletePermissao(perfilId, permissaoName);
-      if (result.status) {
-          alert('Permissão removida com sucesso!');
-      } else {
-          alert('Erro ao remover permissão.');
-      }
-  });
+//       const result = await deletePermissao(perfilId, permissaoName);
+//       if (result.status) {
+//           alert('Permissão removida com sucesso!');
+//       } else {
+//           alert('Erro ao remover permissão.');
+//       }
+//   });
  
 });
