@@ -1,15 +1,24 @@
 <?php return array(
     'root' => array(
         'name' => 'flash/login',
-        'pretty_version' => '1.0.0+no-version-set',
-        'version' => '1.0.0.0',
-        'reference' => NULL,
+        'pretty_version' => 'dev-master',
+        'version' => 'dev-master',
+        'reference' => '34ee1236290b5062c170793f14be9caa21786357',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
         'dev' => true,
     ),
     'versions' => array(
+        'bramus/router' => array(
+            'pretty_version' => '1.6.1',
+            'version' => '1.6.1.0',
+            'reference' => '55657b76da8a0a509250fb55b9dd24e1aa237eba',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../bramus/router',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
         'firebase/php-jwt' => array(
             'pretty_version' => 'v6.9.0',
             'version' => '6.9.0.0',
@@ -20,9 +29,9 @@
             'dev_requirement' => false,
         ),
         'flash/login' => array(
-            'pretty_version' => '1.0.0+no-version-set',
-            'version' => '1.0.0.0',
-            'reference' => NULL,
+            'pretty_version' => 'dev-master',
+            'version' => 'dev-master',
+            'reference' => '34ee1236290b5062c170793f14be9caa21786357',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

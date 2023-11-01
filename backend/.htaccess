@@ -1,0 +1,4 @@
+RewriteEngine On
+RewriteBase /backend/Router/
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^ Rotas.php [QSA,L]

@@ -37,7 +37,7 @@ BEGIN
     SELECT perm.nome 
     FROM permissoes perm
     JOIN perfil_permissoes pp ON perm.id = pp.permissao_id
-    WHERE pp.perfil_id = perfilId;
+    WHERE pp.perfilid = perfilId;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;

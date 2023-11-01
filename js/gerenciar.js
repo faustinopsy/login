@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 
   async function deletePermissao(perfilId, permissaoName) {
-      const response = await fetch(`backend/Router/PerfilPermissaoRouter.php?perfilId=${perfilId}`, {
+      const response = await fetch(`${urlBase}backend/Router/PerfilPermissaoRouter.php?perfilId=${perfilId}`, {
           method: 'DELETE',
           headers: {
               'Content-Type': 'application/json'
@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 
   async function getPermissoes(perfilId) {
-    const response = await fetch(`backend/Router/PerfilPermissaoRouter.php?perfilId=${perfilId}`, {
+    const response = await fetch(`${urlBase}backend/Router/PerfilPermissaoRouter.php?perfilId=${perfilId}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'

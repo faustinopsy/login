@@ -33,7 +33,11 @@ class Crud extends Connection{
         $query = "INSERT INTO $table ($columns) VALUES ($placeholders)";
         $stmt = $this->conn->prepare($query);
         foreach ($data as $key => $value) {
-            $stmt->bindValue(":$key", $this->cripto->hidden($value));
+            if ($key === 'perfilid') {
+                $stmt->bindValue(":$key", $value); 
+            } else {
+                $stmt->bindValue(":$key", $this->cripto->hidden($value)); 
+            }
         }
         return $stmt->execute();
     }
@@ -124,10 +128,10 @@ public function cadPermissao($permissao)
 public function associar($perfilId, $permissaoId)
 {
     $query = "
-        INSERT INTO perfil_permissoes (perfil_id, permissao_id) VALUES (:perfil_id, :permissao_id)
+        INSERT INTO perfil_permissoes (perfilid, permissao_id) VALUES (:perfilid, :permissao_id)
     ";
     $stmt = $this->conn->prepare($query);
-    $stmt->bindParam(":perfil_id", $perfilId);
+    $stmt->bindParam(":perfilid", $perfilId);
     $stmt->bindParam(":permissao_id", $permissaoId);
     return $stmt->execute();
 }
@@ -135,10 +139,10 @@ public function associar($perfilId, $permissaoId)
 public function desassociar($perfilId, $permissaoId)
 {
     $query = "
-        DELETE FROM perfil_permissoes WHERE perfil_id = :perfil_id AND permissao_id = :permissao_id
+        DELETE FROM perfil_permissoes WHERE perfilid = :perfilid AND permissao_id = :permissao_id
     ";
     $stmt = $this->conn->prepare($query);
-    $stmt->bindParam(":perfil_id", $perfilId);
+    $stmt->bindParam(":perfilid", $perfilId);
     $stmt->bindParam(":permissao_id", $permissaoId);
     return $stmt->execute();
 }
@@ -157,7 +161,7 @@ public function listarPerfisPorPermissao($permissaoId)
     $query = "
         SELECT perfil.id, perfil.nome 
         FROM perfil_permissoes
-        JOIN perfil ON perfil.id = perfil_permissoes.perfil_id
+        JOIN perfil ON perfil.id = perfil_permissoes.perfilid
         WHERE perfil_permissoes.permissao_id = :permissao_id
     ";
     $stmt = $this->conn->prepare($query);

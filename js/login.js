@@ -1,3 +1,4 @@
+const urlBase= "http://localhost:5500/"
 document.getElementById("login").addEventListener("click", async function (e) {
     e.preventDefault();
     
@@ -5,7 +6,7 @@ document.getElementById("login").addEventListener("click", async function (e) {
     const password = document.getElementById("senha").value;
     const lembrar = document.getElementById("lembrar").checked;
     
-    const response = await fetch('backend/Router/loginRouter.php', {
+    const response = await fetch(urlBase+'backend/Router/login/', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

@@ -1,13 +1,13 @@
 // document.addEventListener("DOMContentLoaded", async function() {
     const token = sessionStorage.getItem('token');
-
+    const urlBase= "http://localhost:5500/"
     if (!token) {
         redirecioneLogin();
     }
 
   async function validaToken() {
     try {
-        const response = await fetch('backend/Router/loginRouter.php', {
+        const response = await fetch(urlBase+'backend/Router/token', {
             method: 'GET',
             headers: {
                 'Authorization':  token
