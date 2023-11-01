@@ -1,11 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gerenciar Permissões</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ 
+  <title>Permissoes</title>
+  <link rel="stylesheet" href="css/w3.css">
+  <link rel="stylesheet" href="css/styleaTime.css">
 </head>
 <body>
+  <div class="w3-bar w3-black" id="myDIV">
+    <button class="w3-bar-item active w3-button" href="index.html" data-tela="index">ADM</button>
+    <button class="w3-bar-item  w3-button" href="projetos.html" data-tela="projetos">Projetos</button>
+    <button class="w3-bar-item  w3-button" href="equipes.html" data-tela="equipes">Equipe</button>
+  </div>
     <h2>Perfis</h2>
     <ul id="perfilList"></ul>
 
@@ -19,6 +27,26 @@
     <button id="addPermissaoBtn">Adicionar Permissão</button>
     <button id="removePermissaoBtn">Remover Permissão</button>
     <ul id="permissoesList"></ul>
+
+
+
+
+    <div id="id02" class="w3-modal">
+      <div class="w3-modal-content w3-animate-zoom w3-card-4">
+        <header class="w3-container w3-teal"> 
+          <span onclick="document.getElementById('id02').style.display='none'" 
+          class="w3-button w3-display-topright">&times;</span>
+          <h4>System X</h4>
+        </header>
+        <div class="w3-container">
+          <p id="mensagem"></p>
+        </div>
+        <footer class="w3-container w3-teal">
+          <p>Modal Footer</p>
+        </footer>
+      </div>
+    </div>
+    <script src="js/x.js"></script>
     <script src="js/gerenciar.js"></script>
 </body>
 </html>

@@ -1,9 +1,8 @@
-document.addEventListener("DOMContentLoaded", async function() {
+// document.addEventListener("DOMContentLoaded", async function() {
     const token = sessionStorage.getItem('token');
 
     if (!token) {
         redirecioneLogin();
-        return;
     }
 
   async function validaToken() {
@@ -23,7 +22,6 @@ document.addEventListener("DOMContentLoaded", async function() {
 
         itensMenu.forEach(item => {
             const nomeTela = item.dataset.tela; 
-            console.log(nomeTela)
             if (telasPermitidas.includes(nomeTela)) {
                 item.style.display = 'block'; 
             } else {
@@ -48,15 +46,15 @@ document.addEventListener("DOMContentLoaded", async function() {
         console.error("Erro ao validar token:", error);
         redirecioneLogin(error);
     }
-}
+    }
 
-validaToken();
+    validaToken();
 
-setInterval(validaToken, 60000);
-});
+    setInterval(validaToken, 60000);
+// });
 
 function redirecioneLogin() {
-    document.getElementById("mensagem").innerText="Token inválido ou expirado!"
-    document.getElementById('id02').style.display='block'
+    // document.getElementById("mensagem").innerText="Token inválido ou expirado!"
+    // document.getElementById('id02').style.display='block'
     window.location.href = "login.html";
 }
