@@ -26,7 +26,6 @@ class Crud extends Connection{
                 continue;
             }
             $data[$property->getName()] = $property->getValue($object);
-           
         }
         $columns = implode(", ", array_keys($data));
         $placeholders = ":" . implode(", :", array_keys($data));
@@ -115,7 +114,13 @@ public function listarTodosOsPerfis()
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
-
+public function listarTodasPermissoes()
+{
+    $query = "SELECT id, nome FROM permissoes";
+    $stmt = $this->conn->prepare($query);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
 public function cadPermissao($permissao)
 {
     $query = "

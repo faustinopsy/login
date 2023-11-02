@@ -11,6 +11,7 @@
     body {
       display: none;
     }
+
   </style>
   <script src="js/x.js"></script>
 </head>
@@ -20,9 +21,8 @@
     <a class="w3-bar-item  w3-button" href="projetos.html" data-tela="projetos">Projetos</a>
     <a class="w3-bar-item  w3-button" href="equipes.html" data-tela="equipes">Equipe</a>
   </div>
-  <div class="w3-container">
-    <div class="w3-row-padding" style="margin:0 -16px">
-      <div class="w3-third">
+  <div class="w3-container w3-display-middle">
+    <div class="w3-row-padding">
           <div class="w3-card-4 w3-container w3-margin-bottom">
             <h2>Perfis</h2>
             <ul id="perfilList"></ul>
@@ -30,19 +30,23 @@
     
           <div class="w3-card-4 w3-container w3-margin-bottom">
             <h2>Gerenciar Permissões</h2>
-            <label for="perfilSelect">Selecione um Perfil:</label>
-            <select id="perfilSelect"></select>
+            <label for="perfilSelect">Perfil:</label>
+            <select id="perfilSelect" required>
+              <option value="">Selecione</option>
+            </select>
+            <br>
+            <label for="permissaoSelect">Permissão:</label>
+            <select id="permissaoSelect" required>
+                <option value="">Selecione</option>
+            </select>
 
-            <label for="permissaoInput">Nome da Permissão:</label>
-            <input type="text" id="permissaoInput">
-
-            <button id="addPermissaoBtn">Adicionar Permissão</button>
+            <button id="addPermissaoBtn" class="w3-button w3-round w3-border w3-border-blue">Adicionar Permissão</button>
           </div>
-        </div>
-      </div>
+       
   <div class="w3-card-4 w3-container w3-margin-bottom">
     <ul id="permissoesList" class="w3-ul"></ul>
   </div>
+</div>
 </div>
 
 

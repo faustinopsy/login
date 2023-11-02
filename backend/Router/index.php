@@ -120,10 +120,7 @@ $router = new Router();
             echo json_encode(['status' => $resultado]);
         });
     });
-
-    // Todos metodos Permissao
-    $router->mount('/Permissao', function () use ($router) {
-        $router->get('/', function () {
+    $router->get('/Perfil', function () {
         $controller = new PerfilPermissaoController();
             $resultado = $controller->listarTodos();
             if (!$resultado) {
@@ -132,7 +129,20 @@ $router = new Router();
             } else {
                 echo json_encode($resultado);
                 exit;
-            }       
+            }     
+    });
+    // Todos metodos Permissao
+    $router->mount('/Permissao', function () use ($router) {
+        $router->get('/', function () {
+            $controller = new PerfilPermissaoController();
+            $resultado = $controller->listarPermissoes();
+            if (!$resultado) {
+                echo json_encode(["status" => false, "mensagem" => "Nenhuma permissao encontrado"]);
+                exit;
+            } else {
+                echo json_encode($resultado);
+                exit;
+            }     
         });
 
         $router->get('/(\d+)', function ($id) {

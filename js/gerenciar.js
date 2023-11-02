@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function() {
   async function getPerfis() {
-      const response = await fetch('backend/Router/Permissao', {
+      const response = await fetch('backend/Router/Perfil', {
           method: 'GET',
           headers: {
               'Content-Type': 'application/json'
@@ -8,6 +8,28 @@ document.addEventListener("DOMContentLoaded", function() {
       });
       return await response.json();
   }
+  async function getListaPermissoes() {
+    const response = await fetch('backend/Router/Permissao', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    });
+    return await response.json();
+}
+async function populateDropdown() {
+    const permissoes = await getListaPermissoes();
+    const selectElem = document.getElementById("permissaoSelect");
+
+    permissoes.forEach(permissao => {
+        const optionElem = document.createElement("option");
+        optionElem.value = permissao.id;
+        optionElem.textContent = permissao.nome;
+        selectElem.appendChild(optionElem);
+    });
+}
+
+populateDropdown();
 
   async function addPermissao(perfilId, permissaoName) {
       const response = await fetch(`backend/Router/Permissao/${perfilId}`, {
@@ -75,6 +97,9 @@ document.addEventListener("DOMContentLoaded", function() {
             
                 const removeBtn = document.createElement('button');
                 removeBtn.textContent = "Remover";
+                removeBtn.classList.add("w3-button")
+                removeBtn.classList.add("w3-round")
+                removeBtn.classList.add("w3-border")
                 removeBtn.addEventListener('click', async function() {
                     const result = await deletePermissao(perfilId, permissao.nome);
                     if (result.status) {
