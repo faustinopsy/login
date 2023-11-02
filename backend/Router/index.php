@@ -2,7 +2,9 @@
 namespace App\Router;
 require "../../vendor/autoload.php";
 
+use App\Controller\PerfilPermissaoController;
 use App\Controller\UsuarioController;
+use App\Model\Perfil;
 use App\Model\Usuario;
 
 
@@ -32,11 +34,9 @@ $router = new Router();
     $router->set404('/api(/.*)?', function() {
         header('HTTP/1.1 404 Not Found');
         header('Content-Type: application/json');
-
         $jsonArray = array();
         $jsonArray['status'] = "404";
         $jsonArray['status_text'] = "route not defined";
-
         echo json_encode($jsonArray);
     });
 
@@ -45,7 +45,7 @@ $router = new Router();
         header('X-Powered-By: bramus/router');
     });
 
- 
+    // GET token
     $router->get('/token', function () {
         $usuario = new Usuario();
         $headers = getallheaders();
@@ -59,6 +59,7 @@ $router = new Router();
         echo json_encode(['status' => true, 'message' => 'Token válido','telas'=>$validationResponse['telas']]);
         exit;
     });
+    // Rota Login
     $router->post('/login', function () {
         $body = json_decode(file_get_contents('php://input'), true);
         $usuario = new Usuario();
@@ -76,20 +77,19 @@ $router = new Router();
         }
     });
     
-
+    // Todos metodos Usuarios
     $router->mount('/Usuarios', function () use ($router) {
         $router->get('/', function () {
             $usuario = new Usuario();
             $usuariosController = new UsuarioController($usuario);
-                $resultado = $usuariosController->listarUsuarios();
-                if(!$resultado){
-                    echo json_encode(["status" => false, "Usuarios" => $resultado,"mensagem"=>"nenhum resultado encontrado"]);
-                    exit;
-                }else{
-                    echo json_encode(["status" => true, "Usuarios" => $resultado]);
-                    exit;
-                }
-                
+            $resultado = $usuariosController->listarUsuarios();
+            if(!$resultado){
+                echo json_encode(["status" => false, "Usuarios" => $resultado,"mensagem"=>"nenhum resultado encontrado"]);
+                exit;
+            }else{
+                echo json_encode(["status" => true, "Usuarios" => $resultado]);
+                exit;
+            }
         });
 
         $router->get('/(\d+)', function ($id) {
@@ -121,6 +121,46 @@ $router = new Router();
         });
     });
 
+    // Todos metodos Permissao
+    $router->mount('/Permissao', function () use ($router) {
+        $router->get('/', function () {
+        $controller = new PerfilPermissaoController();
+            $resultado = $controller->listarTodos();
+            if (!$resultado) {
+                echo json_encode(["status" => false, "mensagem" => "Nenhum perfil encontrado"]);
+                exit;
+            } else {
+                echo json_encode($resultado);
+                exit;
+            }       
+        });
+
+        $router->get('/(\d+)', function ($id) {
+            $perfil = new Perfil();
+            $perfil->setId($id);
+            $controller = new PerfilPermissaoController();
+            $resultado = $controller->obterPermissoesDoPerfil($perfil);
+            if (!$resultado) {
+                echo json_encode(["status" => false, "mensagem" => "Nenhum resultado encontrado"]);
+                exit;
+            } else {
+                echo json_encode($resultado);
+                exit;
+            }
+        });
+
+        $router->put('/(\d+)', function ($id) {
+            echo 'Update usuario id ' . htmlentities($id);
+        });
+        $router->delete('/(\d+)', function ($id) {
+            $controller = new PerfilPermissaoController();
+            $perfil = new Perfil();
+            $body = json_decode(file_get_contents('php://input'), true);
+            $perfil->setId($id);
+            $resultado = $controller->removerPermissao($perfil, $body['nome']);
+            echo json_encode(['status' => $resultado]);
+        });
+    });
 
     $router->run();
 

@@ -1,4 +1,4 @@
-// document.addEventListener("DOMContentLoaded", async function() {
+
     const token = sessionStorage.getItem('token');
     const urlBase= "http://localhost:5500/"
     if (!token) {
@@ -6,6 +6,7 @@
     }
 
   async function validaToken() {
+   
     try {
         const response = await fetch(urlBase+'backend/Router/token', {
             method: 'GET',
@@ -42,6 +43,8 @@
         if (!response.ok || !jsonResponse.status) {
             redirecioneLogin(jsonResponse.message);
         }
+        document.body.style.display = 'block';
+
     } catch (error) {
         console.error("Erro ao validar token:", error);
         redirecioneLogin(error);
@@ -51,7 +54,7 @@
     validaToken();
 
     setInterval(validaToken, 60000);
-// });
+
 
 function redirecioneLogin() {
     // document.getElementById("mensagem").innerText="Token inválido ou expirado!"

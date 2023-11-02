@@ -7,28 +7,43 @@
   <title>Permissoes</title>
   <link rel="stylesheet" href="css/w3.css">
   <link rel="stylesheet" href="css/styleaTime.css">
+  <style>
+    body {
+      display: none;
+    }
+  </style>
+  <script src="js/x.js"></script>
 </head>
 <body>
   <div class="w3-bar w3-black" id="myDIV">
-    <button class="w3-bar-item active w3-button" href="index.html" data-tela="index">ADM</button>
-    <button class="w3-bar-item  w3-button" href="projetos.html" data-tela="projetos">Projetos</button>
-    <button class="w3-bar-item  w3-button" href="equipes.html" data-tela="equipes">Equipe</button>
+    <a class="w3-bar-item active w3-button" href="index.html" data-tela="index">ADM</a>
+    <a class="w3-bar-item  w3-button" href="projetos.html" data-tela="projetos">Projetos</a>
+    <a class="w3-bar-item  w3-button" href="equipes.html" data-tela="equipes">Equipe</a>
   </div>
-    <h2>Perfis</h2>
-    <ul id="perfilList"></ul>
+  <div class="w3-container">
+    <div class="w3-row-padding" style="margin:0 -16px">
+      <div class="w3-third">
+          <div class="w3-card-4 w3-container w3-margin-bottom">
+            <h2>Perfis</h2>
+            <ul id="perfilList"></ul>
+          </div>
+    
+          <div class="w3-card-4 w3-container w3-margin-bottom">
+            <h2>Gerenciar Permissões</h2>
+            <label for="perfilSelect">Selecione um Perfil:</label>
+            <select id="perfilSelect"></select>
 
-    <h2>Gerenciar Permissões</h2>
-    <label for="perfilSelect">Selecione um Perfil:</label>
-    <select id="perfilSelect"></select>
+            <label for="permissaoInput">Nome da Permissão:</label>
+            <input type="text" id="permissaoInput">
 
-    <label for="permissaoInput">Nome da Permissão:</label>
-    <input type="text" id="permissaoInput">
-
-    <button id="addPermissaoBtn">Adicionar Permissão</button>
-    <!-- <button id="removePermissaoBtn">Remover Permissão</button> -->
-    <ul id="permissoesList"></ul>
-
-
+            <button id="addPermissaoBtn">Adicionar Permissão</button>
+          </div>
+        </div>
+      </div>
+  <div class="w3-card-4 w3-container w3-margin-bottom">
+    <ul id="permissoesList" class="w3-ul"></ul>
+  </div>
+</div>
 
 
     <div id="id02" class="w3-modal">
