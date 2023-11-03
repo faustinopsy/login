@@ -1,8 +1,10 @@
 document.addEventListener("DOMContentLoaded", function() {
+    const token = sessionStorage.getItem('token');
   async function getPerfis() {
       const response = await fetch('backend/Router/Perfil', {
           method: 'GET',
           headers: {
+              'Authorization':  token,
               'Content-Type': 'application/json'
           }
       });
@@ -12,6 +14,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const response = await fetch('backend/Router/Permissao', {
         method: 'GET',
         headers: {
+            'Authorization':  token,
             'Content-Type': 'application/json'
         }
     });
@@ -35,6 +38,7 @@ populateDropdown();
       const response = await fetch(`backend/Router/Permissao`, {
           method: 'POST',
           headers: {
+               'Authorization':  token,
               'Content-Type': 'application/json'
           },
           body: JSON.stringify({perfilId: perfilId, nome: permissaoName })
@@ -46,6 +50,7 @@ populateDropdown();
       const response = await fetch(`${urlBase}backend/Router/Permissao/${perfilId}`, {
           method: 'DELETE',
           headers: {
+              'Authorization':  token,
               'Content-Type': 'application/json'
           },
           body: JSON.stringify({ nome: permissaoName })
@@ -57,6 +62,7 @@ populateDropdown();
     const response = await fetch(`${urlBase}backend/Router/Permissao/${perfilId}`, {
         method: 'GET',
         headers: {
+            'Authorization':  token,
             'Content-Type': 'application/json'
         }
     });

@@ -50,7 +50,7 @@ $permitido = new PermissaoController();
     // GET token
     $router->get('/token', function () {
         $permitido = new PermissaoController();
-        $permitido->autorizado();
+        $permitido->verToken();
     });
     // Rota Login
     $router->post('/login', function () {

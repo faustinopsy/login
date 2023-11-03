@@ -1,4 +1,3 @@
-
     const token = sessionStorage.getItem('token');
     const urlBase= "http://localhost:5500/"
     if (!token) {
