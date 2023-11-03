@@ -23,7 +23,7 @@ async function populateDropdown() {
 
     permissoes.forEach(permissao => {
         const optionElem = document.createElement("option");
-        optionElem.value = permissao.id;
+        optionElem.value = permissao.nome;
         optionElem.textContent = permissao.nome;
         selectElem.appendChild(optionElem);
     });
@@ -32,12 +32,12 @@ async function populateDropdown() {
 populateDropdown();
 
   async function addPermissao(perfilId, permissaoName) {
-      const response = await fetch(`backend/Router/Permissao/${perfilId}`, {
+      const response = await fetch(`backend/Router/Permissao`, {
           method: 'POST',
           headers: {
               'Content-Type': 'application/json'
           },
-          body: JSON.stringify({ nome: permissaoName })
+          body: JSON.stringify({perfilId: perfilId, nome: permissaoName })
       });
       return await response.json();
   }
@@ -126,7 +126,7 @@ populateDropdown();
 
   document.getElementById('addPermissaoBtn').addEventListener('click', async function() {
       const perfilId = document.getElementById('perfilSelect').value;
-      const permissaoName = document.getElementById('permissaoInput').value;
+      const permissaoName = document.getElementById('permissaoSelect').value;
 
       const result = await addPermissao(perfilId, permissaoName);
       if (result.status) {

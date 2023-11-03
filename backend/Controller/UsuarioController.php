@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 use App\Database\Crud;
+use App\Model\Usuario;
 use Exception;
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
@@ -17,6 +18,7 @@ class UsuarioController extends Crud{
         $this->usuarios=$usuario;
         $this->cripto=new Crypto();
     }
+    
     public function validarToken($token){
         
         $key = TOKEN;
@@ -64,6 +66,11 @@ class UsuarioController extends Crud{
     
     public function buscarPorEmail(string $email){
         $condicoes = ['email' => $email];
+        $resultados = $this->select($this->usuarios, $condicoes);
+        return count($resultados) > 0 ? $resultados[0] : null;
+    }
+    public function buscarPorId(int $id){
+        $condicoes = ['id' => $id];
         $resultados = $this->select($this->usuarios, $condicoes);
         return count($resultados) > 0 ? $resultados[0] : null;
     }

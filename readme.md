@@ -23,7 +23,7 @@ Após a instalçao das dependências acima mencionadas, uma para gerenciar a cri
 ### Login
 
 Ao realizar o login, um token JWT é gerado para o usuário com base em suas credenciais.
-o frontend recebe o token caso a autenticação seja bem sucedida, e a página index.html a cada 1 minuto faz uma requisição para verificar o token
+o frontend recebe o token caso a autenticação seja bem sucedida, e o javascript "x.js" a cada 1 minuto faz uma requisição para verificar o token e verificar as telas autorizadas pela passoa logada.
 
 ```php
 $key = "YOUR_SECRET_KEY";

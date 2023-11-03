@@ -41,7 +41,6 @@ class Crud extends Connection{
         return $stmt->execute();
     }
     public function select($object, $conditions = []) {
-        
         $reflectionClass = new \ReflectionClass($object);
         $table=$reflectionClass->getShortName();
         $query = "SELECT * FROM $table";
@@ -53,7 +52,11 @@ class Crud extends Connection{
         }
         $stmt = $this->conn->prepare($query);
         foreach ($conditions as $key => $value) {
-            $stmt->bindValue(":$key", $this->cripto->hidden($value));
+            if ($key === 'id') {
+                $stmt->bindValue(":$key", $value);
+            }else{
+                $stmt->bindValue(":$key", $this->cripto->hidden($value));
+            } 
         }
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
