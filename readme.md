@@ -52,12 +52,26 @@ try {
 
 ## Estrutura do Projeto
 backend/Controller/UsuarioController.php: Contém a lógica para gerar e validar o JWT.
-backend/Router/LoginRouter.php: Roteamento e processamento das requisições HTTP.
+backend/Router/: Roteamento e processamento das requisições HTTP.
 ## Como Usar
 - Login
-Para fazer login, envie uma requisição POST para backend/Router/loginRouter.php com os campos email e senha.
-Se for bem-sucedido, você receberá um JWT que será usado para futuras autenticações.
+Para fazer login, envie uma requisição POST para backend/Router/ com os campos email e senha.
+Se for bem-sucedido, você receberá um JWT que será usado para futuras autenticações, salvando em sessionStorage.
 
+```js
+    const response = await fetch(urlBase+'backend/Router/login', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ email, senha: password,lembrar })
+    });
+    const data = await response.json();
+    if (data.status) {
+        sessionStorage.setItem('token', data.token);
+        window.location.href = "index.html"; 
+    }
+```
 - Validar Token
 Para validar o token, envie uma requisição GET para backend/Router/loginRouter.php com o token no cabeçalho de Autorização.
 O token será validado e, se ainda estiver válido, a resposta será positiva.
