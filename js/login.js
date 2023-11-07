@@ -5,7 +5,7 @@ document.getElementById("login").addEventListener("click", async function (e) {
     const password = document.getElementById("senha").value;
     const lembrar = document.getElementById("lembrar").checked;
     
-    const response = await fetch('backend/Router/loginRouter.php', {
+    const response = await fetch('backend/Router/LoginRouter.php', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

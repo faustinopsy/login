@@ -39,7 +39,7 @@ class UsuarioController extends Crud{
         if (!password_verify($senha, $this->cripto->show($resultado[0]['senha']))) {
             return ['status' => false, 'message' => 'Senha incorreta.'];
         }
-        $permissoes = $this->selectPermissoesPorPerfil($resultado[0]['perfil_id']);
+        $permissoes = $this->selectPermissoesPorPerfil($resultado[0]['perfilid']);
         $key = TOKEN;
         $algoritimo='HS256';
             $payload = [

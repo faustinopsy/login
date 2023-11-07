@@ -7,19 +7,22 @@
 
   async function validaToken() {
     try {
-        const response = await fetch('backend/Router/loginRouter.php', {
+        const response = await fetch('backend/Router/LoginRouter.php', {
             method: 'GET',
             headers: {
-                'Authorization':  token
+                'authorization':  token
             }
         });
 
         const jsonResponse = await response.json();
-        const telasPermitidas = jsonResponse.telas.map(tela => tela.nome);
+        const telasPermitidas = jsonResponse.tela.map(tela => tela.nome);
+        console.log(jsonResponse)
         const nomePaginaAtual = window.location.pathname.split('/').pop().replace('.html', '');
         
         const itensMenu = document.querySelectorAll('.w3-bar-item');
-
+        if (!jsonResponse.status) {  
+             window.location.href = 'login.html';  
+            } 
         itensMenu.forEach(item => {
             const nomeTela = item.dataset.tela; 
             if (telasPermitidas.includes(nomeTela)) {
@@ -44,7 +47,7 @@
         }
     } catch (error) {
         console.error("Erro ao validar token:", error);
-        redirecioneLogin(error);
+        //redirecioneLogin(error);
     }
     }
 

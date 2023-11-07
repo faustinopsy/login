@@ -32,14 +32,14 @@ switch($_SERVER["REQUEST_METHOD"]){
         break;
         case "GET":
             $headers = getallheaders();
-            $token = $headers['Authorization'] ?? null;
+            $token = $headers['authorization'] ?? null;
             $usuariosController = new UsuarioController($usuario);
             $validationResponse = $usuariosController->validarToken($token);
             if ($token === null || !$validationResponse['status']) {
-                echo json_encode(['status' => false, 'message' => $validationResponse['message']]);
+                echo json_encode($validationResponse);
                 exit;
             }
-            echo json_encode(['status' => true, 'message' => 'Token válido','telas'=>$validationResponse['telas']]);
+            echo json_encode(['status' => true, 'message' => 'Token válido','tela'=>$validationResponse['telas']]);
             exit;
             break; 
 }
