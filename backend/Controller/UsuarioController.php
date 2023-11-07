@@ -24,7 +24,7 @@ class UsuarioController extends Crud{
         try {
             $decoded = JWT::decode($token, new Key($key, $algoritimo));
             $permissoes = $decoded->telas;
-            return ['status' => true, 'message' => 'Token válido!', 'telas'=>$permissoes];
+            return ['status' => true, 'message' => 'Token válido!', 'tela'=>$permissoes];
         } catch(Exception $e) {
             return ['status' => false, 'message' => 'Token inválido! Motivo: ' . $e->getMessage()];
         }

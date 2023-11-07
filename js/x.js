@@ -16,7 +16,6 @@
 
         const jsonResponse = await response.json();
         const telasPermitidas = jsonResponse.tela.map(tela => tela.nome);
-        console.log(jsonResponse)
         const nomePaginaAtual = window.location.pathname.split('/').pop().replace('.html', '');
         
         const itensMenu = document.querySelectorAll('.w3-bar-item');

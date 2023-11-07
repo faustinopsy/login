@@ -47,7 +47,7 @@ populateDropdown();
   }
 
   async function deletePermissao(perfilId, permissaoName) {
-      const response = await fetch(`backend/Router/PerfilPermissaoRouter.php?perfilId=${perfilId}`, {
+      const response = await fetch(`${urlBase}backend/Router/PerfilPermissaoRouter.php?perfilId=${perfilId}`, {
           method: 'DELETE',
           headers: {
               'Authorization':  token,
@@ -59,7 +59,7 @@ populateDropdown();
   }
 
   async function getPermissoes(perfilId) {
-    const response = await fetch(`backend/Router/PerfilPermissaoRouter.php?perfilId=${perfilId}`, {
+    const response = await fetch(`${urlBase}backend/Router/PerfilPermissaoRouter.php?perfilId=${perfilId}`, {
         method: 'GET',
         headers: {
             'Authorization':  token,
