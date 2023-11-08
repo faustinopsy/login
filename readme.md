@@ -12,8 +12,10 @@ Sistema de autenticação simples utilizando JSON Web Tokens (JWT).
 
 Clone o repositório depois instale a dependencia abaixo
 Instale a biblioteca via composer:
+```php
 composer require firebase/php-jwt
 composer update
+```
 ## Uso
 essa atualização já está tudo pronto, inclusive usa o SQlite para baixar e testar, entao não precisa instalar as dependências
 

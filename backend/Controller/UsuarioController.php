@@ -61,6 +61,17 @@ class UsuarioController extends Crud{
     public function listarUsuarios(){
         return $this->select($this->usuarios);
     }
+    public function listarUsuariosDescriptografado(){
+        $resultado=$this->select($this->usuarios);
+        $retorno[]=[
+            'id' => $resultado[0]['id'],
+            'nome' => $this->cripto->show($resultado[0]['nome']),
+            'email' => $this->cripto->show($resultado[0]['email']),
+            'criado' => $resultado[0]['criado'],
+        ];
+             
+        return $retorno;
+    }
     
     public function buscarPorEmail(string $email){
         $condicoes = ['email' => $email];
