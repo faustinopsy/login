@@ -1,60 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="js/x.js"></script>
-    <title>Segunda Tela</title>
-    <link rel="stylesheet" href="css/w3.css">
-    <link rel="stylesheet" href="css/styleaTime.css">
-    <style>
-    
-      </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ 
+  <title>Permissoes</title>
+  <link rel="stylesheet" href="css/w3.css">
+  <link rel="stylesheet" href="css/styleaTime.css">
+  <style>
+    body {
+      display: none;
+    }
+
+  </style>
+  <script src="js/x.js"></script>
 </head>
 <body>
-  
   <div class="w3-bar w3-black" id="myDIV">
-    <button class="w3-bar-item w3-button" onclick="openTab('p1')" >XXXXX</button>
-    <button class="w3-bar-item active w3-button" onclick="openTab('p2')" >Projetos</button>
-    <button class="w3-bar-item w3-button" onclick="openTab('p3')" >Equipe</button>
+    <a class="w3-bar-item active w3-button" href="index.html" data-tela="index">ADM</a>
+    <a class="w3-bar-item  w3-button" href="projetos.html" data-tela="projetos">Projetos</a>
+    <a class="w3-bar-item  w3-button" href="equipes.html" data-tela="equipes">Equipe</a>
   </div>
-  
-  <div id="p1" class="w3-container tab" style="display:none">
-    <h4>Users</h4>
-    <div id="users"></div>
+  <div class="w3-container w3-display-middle">
+    <div class="w3-row-padding">
+          <div class="w3-card-4 w3-container w3-margin-bottom">
+            <h2>Perfis</h2>
+            <ul id="perfilList"></ul>
+          </div>
+    
+          <div class="w3-card-4 w3-container w3-margin-bottom">
+            <h2>Gerenciar Permissões</h2>
+            <label for="perfilSelect">Perfil:</label>
+            <select id="perfilSelect" required>
+              <option value="">Selecione</option>
+            </select>
+            <br>
+            <label for="permissaoSelect">Permissão:</label>
+            <select id="permissaoSelect" required>
+                <option value="">Selecione</option>
+            </select>
 
+            <button id="addPermissaoBtn" class="w3-button w3-round w3-border w3-border-blue">Adicionar Permissão</button>
+          </div>
+       
+  <div class="w3-card-4 w3-container w3-margin-bottom">
+    <ul id="permissoesList" class="w3-ul"></ul>
   </div>
-  
-  <div id="p2" class="w3-container tab" >
-    <h4>Projetos</h4>
-    <div id="cards"></div> 
-  </div>
-  
-  <div id="p3" class="w3-container tab" style="display:none">
-    <h4>Equipe</h4>
-    <div id="time"></div> 
-  </div>
-  
+</div>
+</div>
 
 
     <div id="id02" class="w3-modal">
-        <div class="w3-modal-content w3-animate-zoom w3-card-4">
-          <header class="w3-container w3-teal"> 
-            <span onclick="document.getElementById('id02').style.display='none'" 
-            class="w3-button w3-display-topright">&times;</span>
-            <h4>System X</h4>
-          </header>
-          <div class="w3-container">
-            <p id="mensagem"></p>
-          </div>
-          <footer class="w3-container w3-teal">
-            <p>Modal Footer</p>
-          </footer>
+      <div class="w3-modal-content w3-animate-zoom w3-card-4">
+        <header class="w3-container w3-teal"> 
+          <span onclick="document.getElementById('id02').style.display='none'" 
+          class="w3-button w3-display-topright">&times;</span>
+          <h4>System X</h4>
+        </header>
+        <div class="w3-container">
+          <p id="mensagem"></p>
         </div>
+        <footer class="w3-container w3-teal">
+          <p>Modal Footer</p>
+        </footer>
       </div>
-
-      <script src="js/cards.js"></script>
-      <script src="js/getUsers.js"></script>
-      <script src="js/times.js"></script>
+    </div>
+    <script src="js/gerenciar.js"></script>
 </body>
 </html>

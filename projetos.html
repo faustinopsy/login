@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="js/x.js"></script>
+    <title>Segunda Tela</title>
+    <link rel="stylesheet" href="css/w3.css">
+    <link rel="stylesheet" href="css/styleaTime.css">
+    <style>
+    
+      </style>
+</head>
+<body>
+  
+  <div class="w3-bar w3-black" id="myDIV">
+    <a class="w3-bar-item  w3-button" href="index.html" data-tela="index">ADM</a>
+    <a class="w3-bar-item  active w3-button" href="projetos.html" data-tela="projetos">Projetos</a>
+    <a class="w3-bar-item   w3-button" href="equipes.html" data-tela="equipes">Equipe</a>
+  </div>
+  
+  <div id="p1" class="w3-container tab" style="display:none">
+    <h4>XXXXX</h4>
+    <p>Lorem ipsum dolor sit amet. Sed praesentium quibusdam non fugit mollitia rem deserunt minima ex assumenda placeat hic dolore autem et harum itaque? Vel enim quas qui commodi perspiciatis et voluptatum ratione. </p>
+    <pre><code>&lt;!-- Et omnis eveniet. --&gt;<br>
+      &lt;minus&gt;Non dolorem consectetur eos voluptate odio et accusantium fugit?&lt;/minus&gt;<br>
+      &lt;soluta&gt;Est dolore aliquam est fuga totam cum omnis magni.
+      &lt;/soluta&gt;<br>&lt;et&gt;Ut alias voluptates.&lt;/et&gt;<br>&lt;harum&gt;Vel quod quisquam?&lt;/harum&gt;<br>
+    </code></pre>
+
+  </div>
+  
+  <div id="p2" class="w3-container tab" >
+    <h4>Projetos</h4>
+    <div id="cards"></div> 
+  </div>
+  
+  <div id="p3" class="w3-container tab" style="display:none">
+    <h4>Equipe</h4>
+    <div id="time"></div> 
+  </div>
+  
+
+
+    <div id="id02" class="w3-modal">
+        <div class="w3-modal-content w3-animate-zoom w3-card-4">
+          <header class="w3-container w3-teal"> 
+            <span onclick="document.getElementById('id02').style.display='none'" 
+            class="w3-button w3-display-topright">&times;</span>
+            <h4>System X</h4>
+          </header>
+          <div class="w3-container">
+            <p id="mensagem"></p>
+          </div>
+          <footer class="w3-container w3-teal">
+            <p>Modal Footer</p>
+          </footer>
+        </div>
+      </div>
+
+      <script src="js/cards.js"></script>
+      <script src="js/times.js"></script>
+</body>
+</html>
