@@ -1,13 +1,13 @@
 // document.addEventListener("DOMContentLoaded", async function() {
     const token = sessionStorage.getItem('token');
-
+    const urlBase="http://localhost:8089/"
     if (!token) {
         redirecioneLogin();
     }
 
   async function validaToken() {
     try {
-        const response = await fetch('backend/Router/LoginRouter.php', {
+        const response = await fetch(`${urlBase}backend/Router/LoginRouter.php`, {
             method: 'GET',
             headers: {
                 'authorization':  token
@@ -40,7 +40,7 @@
             }
         }
 
-
+        document.body.style.display = 'block';
         if (!response.ok || !jsonResponse.status) {
             redirecioneLogin(jsonResponse.message);
         }

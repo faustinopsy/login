@@ -1,11 +1,11 @@
 document.getElementById("login").addEventListener("click", async function (e) {
     e.preventDefault();
-    
+    const urlBase="http://localhost:8089/"
     const email = document.getElementById("email").value;
     const password = document.getElementById("senha").value;
     const lembrar = document.getElementById("lembrar").checked;
     
-    const response = await fetch('backend/Router/LoginRouter.php', {
+    const response = await fetch(`${urlBase}backend/Router/LoginRouter.php`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
