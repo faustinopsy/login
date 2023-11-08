@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt_BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário de Usuário</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="card">
+        <h1>Escolha a Opção</h1>
+        <a href="criaruser.html">Cadastrar</a><br>
+        <a href="todosuser.html">Listar todos</a>
+        <a href="buscauser.html">Buscar</a>
+        <a href="criarprod.html">Cadastrar</a><br>
+        <a href="todosprod.html">Listar todos</a>
+        <a href="buscaprod.html">Buscar</a>
+    </div>
+    <script>
+        window.onload = function() {
+            fetch('/backend/token')
+                .then(response => response.json())
+                .then(data => localStorage.setItem('token', data.token));
+        }
+        
+    </script>
+</body>
+</html>
