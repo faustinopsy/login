@@ -15,13 +15,14 @@
         });
 
         const jsonResponse = await response.json();
+        if (!jsonResponse.status) {  
+            window.location.href = 'login.html';  
+           } 
         const telasPermitidas = jsonResponse.tela.map(tela => tela.nome);
         const nomePaginaAtual = window.location.pathname.split('/').pop().replace('.html', '');
         
         const itensMenu = document.querySelectorAll('.w3-bar-item');
-        if (!jsonResponse.status) {  
-             window.location.href = 'login.html';  
-            } 
+       
         itensMenu.forEach(item => {
             const nomeTela = item.dataset.tela; 
             if (telasPermitidas.includes(nomeTela)) {
