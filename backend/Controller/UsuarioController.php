@@ -36,7 +36,7 @@ class UsuarioController extends Crud{
         if (!$resultado) {
             return ['status' => false, 'message' => 'Usuário não encontrado.'];
         }
-        if (!password_verify($senha, $this->cripto->show($resultado[0]['senha']))) {
+        if (!password_verify($senha, $resultado[0]['senha'])) {
             return ['status' => false, 'message' => 'Senha incorreta.'];
         }
         $permissoes = $this->selectPermissoesPorPerfil($resultado[0]['perfilid']);
@@ -65,8 +65,8 @@ class UsuarioController extends Crud{
         $resultado=$this->select($this->usuarios);
         $retorno[]=[
             'id' => $resultado[0]['id'],
-            'nome' => $this->cripto->show($resultado[0]['nome']),
-            'email' => $this->cripto->show($resultado[0]['email']),
+            'nome' => $resultado[0]['nome'],
+            'email' => $resultado[0]['email'],
             'criado' => $resultado[0]['criado'],
         ];
              

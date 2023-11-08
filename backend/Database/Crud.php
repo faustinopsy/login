@@ -33,7 +33,7 @@ class Crud extends Connection{
         $query = "INSERT INTO $table ($columns) VALUES ($placeholders)";
         $stmt = $this->conn->prepare($query);
         foreach ($data as $key => $value) {
-            $stmt->bindValue(":$key", $this->cripto->hidden($value));
+            $stmt->bindValue(":$key", $value);
         }
         return $stmt->execute();
     }
@@ -50,7 +50,7 @@ class Crud extends Connection{
         }
         $stmt = $this->conn->prepare($query);
         foreach ($conditions as $key => $value) {
-            $stmt->bindValue(":$key", $this->cripto->hidden($value));
+            $stmt->bindValue(":$key", $value);
         }
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -83,7 +83,7 @@ class Crud extends Connection{
         $query = "UPDATE $table SET $dataStr WHERE $conditionsStr";
         $stmt = $this->conn->prepare($query);
         foreach ($data as $key => $value) {
-            $stmt->bindValue(":$key", $this->cripto->hidden($value));
+            $stmt->bindValue(":$key", $value);
         }
         foreach ($conditions as $key => $value) {
             $stmt->bindValue(":condition_$key", $value);

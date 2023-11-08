@@ -1,6 +1,6 @@
 // document.addEventListener("DOMContentLoaded", async function() {
     const token = sessionStorage.getItem('token');
-    const urlBase="https://faustinopsy.000webhostapp.com/"
+    const urlBase="http://localhost:8089/"
     if (!token) {
         redirecioneLogin();
     }

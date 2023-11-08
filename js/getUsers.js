@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", async function() {
     
-  const urlBase="https://faustinopsy.000webhostapp.com/"
+  const urlBase="http://localhost:8089/"
   async function buscaUsers() {
     try {
         const response = await fetch(`${urlBase}backend/Router/UsuarioRouter.php`, {

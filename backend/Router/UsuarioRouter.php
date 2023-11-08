@@ -22,7 +22,7 @@ switch($_SERVER["REQUEST_METHOD"]){
         $usuario->setNome($body['nome']);
         $usuario->setEmail($body['email']);
         $usuario->setSenha($body['senha']);
-        
+        $usuario->setPerfilId(2);
         $usuariosController = new UsuarioController($usuario);
         $resultado = $usuariosController->adicionarUsuario();
         echo json_encode(['status' => $resultado]);
