@@ -5,6 +5,7 @@ namespace App\Router;
 require "../../vendor/autoload.php";
 
 use App\Controller\PerfilPermissaoController;
+use App\Controller\PermissaoController;
 use App\Model\Perfil;
 use App\Model\Permissao;
 
