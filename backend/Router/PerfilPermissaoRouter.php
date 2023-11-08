@@ -45,15 +45,17 @@ switch ($_SERVER["REQUEST_METHOD"]) {
                     exit;
                 }
             } else {
-                $resultado = $controller->listarTodos();
-        
+                $permitido = new PermissaoController();
+                $permitido->autorizado();
+                $controller = new PerfilPermissaoController();
+                $resultado = $controller->listarPermissoes();
                 if (!$resultado) {
-                    echo json_encode(["status" => false, "mensagem" => "Nenhum perfil encontrado"]);
+                    echo json_encode(["status" => false, "mensagem" => "Nenhuma permissao encontrado"]);
                     exit;
                 } else {
                     echo json_encode($resultado);
                     exit;
-                }
+                }     
             }
             break;
         
