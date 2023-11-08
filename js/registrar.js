@@ -1,6 +1,6 @@
 document.getElementById('registrationForm').addEventListener('submit', function (e) {
     e.preventDefault();
-    const urlBase="http://localhost:8089/"
+    const urlBase="https://faustinopsy.000webhostapp.com/"
     const nome = document.getElementById('nome').value;
     const email = document.getElementById('email').value;
     const senha = document.getElementById('senha').value;
