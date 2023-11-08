@@ -35,5 +35,7 @@ class PerfilPermissaoController extends Crud
     public function listarTodos(){
         return $this->listarTodosOsPerfis();
     }
-
+    public function listarPermissoes(){
+        return $this->listarTodasPermissoes();
+    }
 }
