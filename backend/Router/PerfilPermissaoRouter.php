@@ -7,7 +7,6 @@ require "../../vendor/autoload.php";
 use App\Controller\PerfilPermissaoController;
 use App\Model\Perfil;
 use App\Model\Permissao;
-
 $perfil = new Perfil();
 $permissao = new Permissao();
 
@@ -23,7 +22,6 @@ $perfilId = isset($_GET['perfilId']) ? $_GET['perfilId'] : '';
 $permissaoId = isset($body['permissaoId']) ? $body['permissaoId'] : '';
 
 $controller = new PerfilPermissaoController();
-
 switch ($_SERVER["REQUEST_METHOD"]) {
     case "POST":
         $perfil->setId($perfilId);
@@ -45,7 +43,17 @@ switch ($_SERVER["REQUEST_METHOD"]) {
                     echo json_encode($resultado);
                     exit;
                 }
-            } 
+            } else {
+                $resultado = $controller->listarTodos();
+        
+                if (!$resultado) {
+                    echo json_encode(["status" => false, "mensagem" => "Nenhum perfil encontrado"]);
+                    exit;
+                } else {
+                    echo json_encode($resultado);
+                    exit;
+                }
+            }
             break;
         
 
