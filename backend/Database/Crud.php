@@ -131,7 +131,13 @@ public function associar($perfilId, $permissaoId)
     $stmt->bindParam(":permissao_id", $permissaoId);
     return $stmt->execute();
 }
-
+public function listarTodasPermissoes()
+{
+    $query = "SELECT id, nome FROM permissoes";
+    $stmt = $this->conn->prepare($query);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
 public function desassociar($perfilId, $permissaoId)
 {
     $query = "

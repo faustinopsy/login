@@ -5,6 +5,7 @@ namespace App\Router;
 require "../../vendor/autoload.php";
 
 use App\Controller\PerfilPermissaoController;
+use App\Controller\PermissaoController;
 use App\Model\Perfil;
 use App\Model\Permissao;
 
@@ -23,35 +24,27 @@ $perfilId = isset($_GET['perfilId']) ? $_GET['perfilId'] : '';
 $permissaoId = isset($body['permissaoId']) ? $body['permissaoId'] : '';
 
 $controller = new PerfilPermissaoController();
-
+$permitido = new PermissaoController();
+$permitido->autorizado();
 switch ($_SERVER["REQUEST_METHOD"]) {
     case "POST":
-        $perfil->setId($perfilId);
-
-        $resultado = $controller->adicionarPermissao($perfil, $body['nome']);
-        echo json_encode(['status' => $resultado]);
+        
         break;
 
         case "GET":
-            if ($perfilId) {
-                $perfil->setId($perfilId);
-               
-                $resultado = $controller->obterPermissoesDoPerfil($perfil);
-        
-                if (!$resultado) {
-                    echo json_encode(["status" => false, "mensagem" => "Nenhum resultado encontrado"]);
-                    exit;
-                } else {
-                    echo json_encode($resultado);
-                    exit;
-                }
-            } 
+            $resultado = $controller->listarPermissoes();
+            if (!$resultado) {
+                echo json_encode(["status" => false, "mensagem" => "Nenhuma permissao encontrado"]);
+                exit;
+            } else {
+                echo json_encode($resultado);
+                exit;
+            }     
+            
             break;
         
 
     case "DELETE":
-        $perfil->setId($perfilId);
-        $resultado = $controller->removerPermissao($perfil, $body['nome']);
-        echo json_encode(['status' => $resultado]);
+        
         break;
 }

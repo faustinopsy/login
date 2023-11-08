@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", function() {
       return await response.json();
   }
   async function getListaPermissoes() {
-    const response = await fetch(`${urlBase}backend/Router/PerfilPermissaoRouter.php`, {
+    const response = await fetch(`${urlBase}backend/Router/PermissaoRouter.php`, {
         method: 'GET',
         headers: {
             'Authorization':  token,
