@@ -11,12 +11,10 @@ use App\Cryptonita\Crypto;
 
 class UsuarioController extends Crud{
     private $usuarios;
-    private $cripto;
     public function __construct($usuario)
     {
         parent::__construct();
         $this->usuarios=$usuario;
-        $this->cripto=new Crypto();
     }
     
     public function validarToken($token){
@@ -26,7 +24,11 @@ class UsuarioController extends Crud{
         try {
             $decoded = JWT::decode($token, new Key($key, $algoritimo));
             $permissoes = $decoded->telas;
-            return ['status' => true, 'message' => 'Token válido!', 'telas'=>$permissoes];
+            if($_SERVER['SERVER_NAME']==$decoded->aud){
+                return ['status' => true, 'message' => 'Token válido!', 'telas'=>$permissoes];
+            }else{
+                return ['status' => false, 'message' => 'Token inválido! Motivo: dominio invalido' ];
+            }
         } catch(Exception $e) {
             return ['status' => false, 'message' => 'Token inválido! Motivo: ' . $e->getMessage()];
         }
@@ -38,15 +40,17 @@ class UsuarioController extends Crud{
         if (!$resultado) {
             return ['status' => false, 'message' => 'Usuário não encontrado.'];
         }
-        if (!password_verify($senha, $this->cripto->show($resultado[0]['senha']))) {
+        if (!password_verify($senha, $resultado[0]['senha'])) {
             return ['status' => false, 'message' => 'Senha incorreta.'];
         }
         $permissoes = $this->selectPermissoesPorPerfil($resultado[0]['perfilid']);
         $key = TOKEN;
+        $local=$_SERVER['HTTP_HOST'];
+        $nome=$_SERVER['SERVER_NAME'];
         $algoritimo='HS256';
             $payload = [
-                "iss" => "localhost",
-                "aud" => "localhost",
+                "iss" =>  $local,
+                "aud" =>  $nome,
                 "iat" => time(),
                 "exp" => time() + (60 * $checado),  
                 "sub" => $this->usuarios->getEmail(),

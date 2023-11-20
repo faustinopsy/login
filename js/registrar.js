@@ -1,4 +1,3 @@
-const urlBase= "http://localhost:5500/"
 document.getElementById('registrationForm').addEventListener('submit', function (e) {
     e.preventDefault();
 
@@ -19,7 +18,7 @@ document.getElementById('registrationForm').addEventListener('submit', function 
         senha: senha
     };
 
-    fetch(urlBase+'backend/Router/Usuarios/Registrar', {
+    fetch('backend/Router/Usuarios/Registrar', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

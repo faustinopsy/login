@@ -35,7 +35,7 @@ class Crud extends Connection{
             if ($key === 'perfilid') {
                 $stmt->bindValue(":$key", $value); 
             } else {
-                $stmt->bindValue(":$key", $this->cripto->hidden($value)); 
+                $stmt->bindValue(":$key", $value); 
             }
         }
         return $stmt->execute();
@@ -55,7 +55,7 @@ class Crud extends Connection{
             if ($key === 'id') {
                 $stmt->bindValue(":$key", $value);
             }else{
-                $stmt->bindValue(":$key", $this->cripto->hidden($value));
+                $stmt->bindValue(":$key", $value);
             } 
         }
         $stmt->execute();
@@ -89,7 +89,7 @@ class Crud extends Connection{
         $query = "UPDATE $table SET $dataStr WHERE $conditionsStr";
         $stmt = $this->conn->prepare($query);
         foreach ($data as $key => $value) {
-            $stmt->bindValue(":$key", $this->cripto->hidden($value));
+            $stmt->bindValue(":$key", $value);
         }
         foreach ($conditions as $key => $value) {
             $stmt->bindValue(":condition_$key", $value);

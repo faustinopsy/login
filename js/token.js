@@ -1,5 +1,4 @@
     const token = sessionStorage.getItem('token');
-    const urlBase= "http://localhost:5500/"
     if (!token) {
         redirecioneLogin();
     }
@@ -7,7 +6,7 @@
   async function validaToken() {
    
     try {
-        const response = await fetch(urlBase+'backend/Router/token', {
+        const response = await fetch('backend/Router/token', {
             method: 'GET',
             headers: {
                 'Authorization':  token
