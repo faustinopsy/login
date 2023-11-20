@@ -14,11 +14,25 @@
         });
 
         const jsonResponse = await response.json();
+        // const telasPermitidas = [];
+        // for (let i = 0; i < jsonResponse.telas.length; i++) {
+        //     telasPermitidas.push(jsonResponse.telas[i].nome);
+        // }
         const telasPermitidas = jsonResponse.telas.map(tela => tela.nome);
         const nomePaginaAtual = window.location.pathname.split('/').pop().replace('.html', '');
         
         const itensMenu = document.querySelectorAll('.w3-bar-item');
 
+        // for (let i = 0; i < itensMenu.length; i++) {
+        //     const item = itensMenu[i];
+        //     const nomeTela = item.dataset.tela;
+        //     if (telasPermitidas.includes(nomeTela)) {
+        //         item.style.display = 'block';
+        //     } else {
+        //         item.style.display = 'none';
+        //     }
+        // }
+        
         itensMenu.forEach(item => {
             const nomeTela = item.dataset.tela; 
             if (telasPermitidas.includes(nomeTela)) {
