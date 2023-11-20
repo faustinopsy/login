@@ -12,6 +12,8 @@
         }
     ],
     "require": {
-        "firebase/php-jwt": "^6.9"
+        "firebase/php-jwt": "^6.9",
+        "bramus/router": "~1.6",
+        "phpmailer/phpmailer": "^6.8"
     }
 }

@@ -1,28 +1,24 @@
-// document.addEventListener("DOMContentLoaded", async function() {
     const token = sessionStorage.getItem('token');
-    const urlBase="http://localhost:8089/"
     if (!token) {
         redirecioneLogin();
     }
 
   async function validaToken() {
+   
     try {
-        const response = await fetch(`${urlBase}backend/Router/LoginRouter.php`, {
+        const response = await fetch('backend/Router/token', {
             method: 'GET',
             headers: {
-                'authorization':  token
+                'Authorization':  token
             }
         });
 
         const jsonResponse = await response.json();
-        if (!jsonResponse.status) {  
-            window.location.href = 'login.html';  
-           } 
-        const telasPermitidas = jsonResponse.tela.map(tela => tela.nome);
+        const telasPermitidas = jsonResponse.telas.map(tela => tela.nome);
         const nomePaginaAtual = window.location.pathname.split('/').pop().replace('.html', '');
         
         const itensMenu = document.querySelectorAll('.w3-bar-item');
-       
+
         itensMenu.forEach(item => {
             const nomeTela = item.dataset.tela; 
             if (telasPermitidas.includes(nomeTela)) {
@@ -41,20 +37,22 @@
             }
         }
 
-        document.body.style.display = 'block';
+
         if (!response.ok || !jsonResponse.status) {
             redirecioneLogin(jsonResponse.message);
         }
+        document.body.style.display = 'block';
+
     } catch (error) {
         console.error("Erro ao validar token:", error);
-        //redirecioneLogin(error);
+        redirecioneLogin(error);
     }
     }
 
     validaToken();
 
     setInterval(validaToken, 60000);
-// });
+
 
 function redirecioneLogin() {
     // document.getElementById("mensagem").innerText="Token inválido ou expirado!"

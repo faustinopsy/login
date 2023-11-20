@@ -15,7 +15,7 @@ use PDOException;
     private $is_connected = false;
     public function __construct() {
         $configFilePath = __DIR__ . '/config.php';
-        $config = require $configFilePath;
+        $config = require_once $configFilePath;
         $this->host = DB_HOST;
         $this->db_name = DB_NAME;
         $this->username = DB_USER;

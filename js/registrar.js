@@ -18,7 +18,7 @@ document.getElementById('registrationForm').addEventListener('submit', function 
         senha: senha
     };
 
-    fetch(`${urlBase}backend/Router/UsuarioRouter.php`, {
+    fetch('backend/Router/Usuarios/Registrar', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

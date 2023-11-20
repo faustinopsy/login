@@ -26,19 +26,21 @@ class Crud extends Connection{
                 continue;
             }
             $data[$property->getName()] = $property->getValue($object);
-           
         }
         $columns = implode(", ", array_keys($data));
         $placeholders = ":" . implode(", :", array_keys($data));
         $query = "INSERT INTO $table ($columns) VALUES ($placeholders)";
         $stmt = $this->conn->prepare($query);
         foreach ($data as $key => $value) {
-            $stmt->bindValue(":$key", $value);
+            if ($key === 'perfilid') {
+                $stmt->bindValue(":$key", $value); 
+            } else {
+                $stmt->bindValue(":$key", $value); 
+            }
         }
         return $stmt->execute();
     }
     public function select($object, $conditions = []) {
-        
         $reflectionClass = new \ReflectionClass($object);
         $table=$reflectionClass->getShortName();
         $query = "SELECT * FROM $table";
@@ -50,7 +52,11 @@ class Crud extends Connection{
         }
         $stmt = $this->conn->prepare($query);
         foreach ($conditions as $key => $value) {
-            $stmt->bindValue(":$key", $value);
+            if ($key === 'id') {
+                $stmt->bindValue(":$key", $value);
+            }else{
+                $stmt->bindValue(":$key", $value);
+            } 
         }
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -111,7 +117,13 @@ public function listarTodosOsPerfis()
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
-
+public function listarTodasPermissoes()
+{
+    $query = "SELECT id, nome FROM permissoes";
+    $stmt = $this->conn->prepare($query);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
 public function cadPermissao($permissao)
 {
     $query = "
@@ -124,10 +136,10 @@ public function cadPermissao($permissao)
 public function associar($perfilId, $permissaoId)
 {
     $query = "
-        INSERT INTO perfil_permissoes (perfil_id, permissao_id) VALUES (:perfil_id, :permissao_id)
+        INSERT INTO perfil_permissoes (perfilid, permissao_id) VALUES (:perfilid, :permissao_id)
     ";
     $stmt = $this->conn->prepare($query);
-    $stmt->bindParam(":perfil_id", $perfilId);
+    $stmt->bindParam(":perfilid", $perfilId);
     $stmt->bindParam(":permissao_id", $permissaoId);
     return $stmt->execute();
 }
@@ -141,10 +153,10 @@ public function listarTodasPermissoes()
 public function desassociar($perfilId, $permissaoId)
 {
     $query = "
-        DELETE FROM perfil_permissoes WHERE perfil_id = :perfil_id AND permissao_id = :permissao_id
+        DELETE FROM perfil_permissoes WHERE perfilid = :perfilid AND permissao_id = :permissao_id
     ";
     $stmt = $this->conn->prepare($query);
-    $stmt->bindParam(":perfil_id", $perfilId);
+    $stmt->bindParam(":perfilid", $perfilId);
     $stmt->bindParam(":permissao_id", $permissaoId);
     return $stmt->execute();
 }
@@ -163,7 +175,7 @@ public function listarPerfisPorPermissao($permissaoId)
     $query = "
         SELECT perfil.id, perfil.nome 
         FROM perfil_permissoes
-        JOIN perfil ON perfil.id = perfil_permissoes.perfil_id
+        JOIN perfil ON perfil.id = perfil_permissoes.perfilid
         WHERE perfil_permissoes.permissao_id = :permissao_id
     ";
     $stmt = $this->conn->prepare($query);

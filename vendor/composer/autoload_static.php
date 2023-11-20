@@ -7,6 +7,10 @@ namespace Composer\Autoload;
 class ComposerStaticInit291173aad7e123c945983ef82118e7d1
 {
     public static $prefixLengthsPsr4 = array (
+        'P' => 
+        array (
+            'PHPMailer\\PHPMailer\\' => 20,
+        ),
         'F' => 
         array (
             'Firebase\\JWT\\' => 13,
@@ -18,6 +22,10 @@ class ComposerStaticInit291173aad7e123c945983ef82118e7d1
     );
 
     public static $prefixDirsPsr4 = array (
+        'PHPMailer\\PHPMailer\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/phpmailer/phpmailer/src',
+        ),
         'Firebase\\JWT\\' => 
         array (
             0 => __DIR__ . '/..' . '/firebase/php-jwt/src',
@@ -25,6 +33,16 @@ class ComposerStaticInit291173aad7e123c945983ef82118e7d1
         'App\\' => 
         array (
             0 => __DIR__ . '/../..' . '/backend',
+        ),
+    );
+
+    public static $prefixesPsr0 = array (
+        'B' => 
+        array (
+            'Bramus' => 
+            array (
+                0 => __DIR__ . '/..' . '/bramus/router/src',
+            ),
         ),
     );
 
@@ -37,6 +55,7 @@ class ComposerStaticInit291173aad7e123c945983ef82118e7d1
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInit291173aad7e123c945983ef82118e7d1::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInit291173aad7e123c945983ef82118e7d1::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit291173aad7e123c945983ef82118e7d1::$prefixesPsr0;
             $loader->classMap = ComposerStaticInit291173aad7e123c945983ef82118e7d1::$classMap;
 
         }, null, ClassLoader::class);
