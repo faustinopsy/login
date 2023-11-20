@@ -70,7 +70,21 @@ $permitido = new PermissaoController();
             exit;
         }
     });
-    
+    $router->post('/recuperarsenha', function () {
+        $body = json_decode(file_get_contents('php://input'), true);
+        $usuario = new Usuario();
+        if (isset($body['email'])) {
+            $usuario->setEmail($body['email']);
+            $usuariosController = new UsuarioController($usuario);
+            $resultado = $usuariosController->recupasenha();
+            if(!$resultado['status']){
+                echo json_encode(['status' => $resultado['status'], 'message' => $resultado['message']]);
+               exit;
+            }
+            echo json_encode(['status' => $resultado['status'], 'message' => $resultado['message']]);
+            exit;
+        }
+    });
     // Todos metodos Usuarios
     $router->mount('/Usuarios', function () use ($router) {
         $router->get('/', function () {

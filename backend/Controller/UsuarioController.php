@@ -60,6 +60,28 @@ class UsuarioController extends Crud{
             $jwt = JWT::encode($payload, $key,$algoritimo);
         return ['status' => true, 'message' => 'Login bem-sucedido!','token'=>$jwt,'telas'=>$permissoes];
     }
+    public function recupasenha(){
+        $novasenha = $this->gerarStringAlfanumerica(8);
+        $condicoes = ['email' => $this->usuarios->getEmail()];
+        $resultado = $this->select($this->usuarios, $condicoes);
+        if(!$resultado){
+            return ['status' => false, 'message' => 'Usuário não encontrado.'];
+        }
+        $email= new EnviaEMail();
+        $dados=['email'=>$this->usuarios->getEmail(),'senha'=>$novasenha];
+        $emailuser = $this->usuarios->getEmail();
+        if($email->recupasenha($dados)){
+            $senhacriptografada=password_hash($novasenha, PASSWORD_DEFAULT);
+            $query = "UPDATE usuario SET senha=:senha WHERE email=:email";
+            $stmt = $this->conn->prepare($query);
+            $stmt->bindParam(':senha', $senhacriptografada);
+            $stmt->bindParam(':email', $emailuser);
+            $stmt->execute();
+            return ['status'=>true,'message'=>'E-mail enviado com sucesso!'];
+        }else {
+            return ['status'=>false,'message'=>'falha ao enviar email!'];
+        }
+    }
     public function adicionarUsuario(){
         return $this->insert($this->usuarios);
     }
@@ -83,5 +105,15 @@ class UsuarioController extends Crud{
         $condicoes = ['email' => $this->usuarios->getEmail()];
         return $this->delete($this->usuarios, $condicoes);
     }
+    public function gerarStringAlfanumerica($tamanho) {
+        $caracteres = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $stringAleatoria = '';
+        for ($i = 0; $i < $tamanho; $i++) {
+            $index = rand(0, strlen($caracteres) - 1);
+            $stringAleatoria .= $caracteres[$index];
+        }
+        return $stringAleatoria;
+    }
+    
     
 }
