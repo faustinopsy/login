@@ -13,15 +13,21 @@ equipes.forEach(projeto => {
     const container = document.createElement("div");
     container.classList.add("card");
     container.innerHTML = `
-      <div class="imagens-story">
+      <div class="imagens-story" >
         ${projeto.foto.map(imagem => `<img src="${imagem}" style="width:100%" alt="Imagem do projeto ${projeto.titulo}">`).join("")}
       </div>
-      <div class="container">
+      <div class="container" >
       <h3>${projeto.nome}</h3>
       <p>${projeto.descricao}</p>
       </div>
       <a href="${projeto.link}" target="_blank" class="button">Contato</a>
     `;
+    
+    container.setAttribute('data-id', projeto.id);
+    container.addEventListener("click", () => {
+      let cardID = container.getAttribute('data-id');
+      console.log(cardID)
+    });
     cardcoluna.appendChild(container);
     timesContainer.appendChild(cardcoluna);
   });
