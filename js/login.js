@@ -1,6 +1,5 @@
 document.getElementById("login").addEventListener("click", async function (e) {
     e.preventDefault();
-    const urlBase="http://localhost:8089/"
     const email = document.getElementById("email").value;
     const password = document.getElementById("senha").value;
     const lembrar = document.getElementById("lembrar").checked;

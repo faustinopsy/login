@@ -6,12 +6,12 @@ use App\Controller\PerfilPermissaoController;
 use App\Controller\UsuarioController;
 use App\Model\Perfil;
 use App\Model\Usuario;
-use App\Controller\PermissaoController;
+use App\Controller\UsuarioPermissaoController;
 
 use Bramus\Router\Router;
 $usuario = new Usuario();
 $router = new Router();
-$permitido = new PermissaoController();
+$permitido = new UsuarioPermissaoController();
 
     // In case one is using PHP 5.4's built-in server
     $filename = __DIR__ . preg_replace('#(\?.*)$#', '', $_SERVER['REQUEST_URI']);
@@ -49,7 +49,7 @@ $permitido = new PermissaoController();
     
     // GET token
     $router->get('/token', function () {
-        $permitido = new PermissaoController();
+        $permitido = new UsuarioPermissaoController();
         $permitido->verToken();
     });
     // Rota Login
@@ -88,7 +88,7 @@ $permitido = new PermissaoController();
     // Todos metodos Usuarios
     $router->mount('/Usuarios', function () use ($router) {
         $router->get('/', function () {
-            $permitido = new PermissaoController();
+            $permitido = new UsuarioPermissaoController();
             $permitido->autorizado();
             $usuario = new Usuario();
             $usuariosController = new UsuarioController($usuario);
@@ -103,7 +103,7 @@ $permitido = new PermissaoController();
         });
 
         $router->get('/(\d+)', function ($id) {
-            $permitido = new PermissaoController();
+            $permitido = new UsuarioPermissaoController();
             $permitido->autorizado();
             $usuario = new Usuario();
             $usuariosController = new UsuarioController($usuario);
@@ -118,7 +118,7 @@ $permitido = new PermissaoController();
         });
 
         $router->put('/(\d+)', function ($id) {
-            $permitido = new PermissaoController();
+            $permitido = new UsuarioPermissaoController();
             $permitido->autorizado();
             echo 'Update usuario id ' . htmlentities($id);
         });
@@ -135,7 +135,7 @@ $permitido = new PermissaoController();
         });
     });
     $router->get('/Perfil', function () {
-        $permitido = new PermissaoController();
+        $permitido = new UsuarioPermissaoController();
         $permitido->autorizado();
         $controller = new PerfilPermissaoController();
             $resultado = $controller->listarTodos();
@@ -147,15 +147,15 @@ $permitido = new PermissaoController();
                 exit;
             }     
     });
-    // Todos metodos Permissao
-    $router->mount('/Permissao', function () use ($router) {
+    // Todos metodos Permissoes
+    $router->mount('/Permissoes', function () use ($router) {
         $router->get('/', function () {
-            $permitido = new PermissaoController();
+            $permitido = new UsuarioPermissaoController();
             $permitido->autorizado();
             $controller = new PerfilPermissaoController();
             $resultado = $controller->listarPermissoes();
             if (!$resultado) {
-                echo json_encode(["status" => false, "mensagem" => "Nenhuma permissao encontrado"]);
+                echo json_encode(["status" => false, "mensagem" => "Nenhuma Permissoes encontrado"]);
                 exit;
             } else {
                 echo json_encode($resultado);
@@ -164,7 +164,7 @@ $permitido = new PermissaoController();
         });
 
         $router->get('/(\d+)', function ($id) {
-            $permitido = new PermissaoController();
+            $permitido = new UsuarioPermissaoController();
             $permitido->autorizado();
             $perfil = new Perfil();
             $perfil->setId($id);
@@ -179,7 +179,7 @@ $permitido = new PermissaoController();
             }
         });
         $router->post('/', function () {
-            $permitido = new PermissaoController();
+            $permitido = new UsuarioPermissaoController();
             $permitido->autorizado();
             $body = json_decode(file_get_contents('php://input'), true);
             $perfil = new Perfil();
@@ -189,12 +189,12 @@ $permitido = new PermissaoController();
             echo json_encode(['status' => $resultado]);
         });
         $router->put('/(\d+)', function ($id) {
-            $permitido = new PermissaoController();
+            $permitido = new UsuarioPermissaoController();
             $permitido->autorizado();
             echo 'Update usuario id ' . htmlentities($id);
         });
         $router->delete('/(\d+)', function ($id) {
-            $permitido = new PermissaoController();
+            $permitido = new UsuarioPermissaoController();
             $permitido->autorizado();
             $controller = new PerfilPermissaoController();
             $perfil = new Perfil();

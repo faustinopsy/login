@@ -1,7 +1,9 @@
 html {
     box-sizing: border-box;
   }
-  
+  body {
+    display: none;
+  }
   *, *:before, *:after {
     box-sizing: inherit;
   }

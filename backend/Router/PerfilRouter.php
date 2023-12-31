@@ -6,12 +6,10 @@ require "../../vendor/autoload.php";
 
 use App\Controller\PerfilPermissaoController;
 use App\Controller\UsuarioPermissaoController;
-use App\Controller\PermissaoController;
+use App\Controller\PerfilController;
 use App\Model\Perfil;
-use App\Model\Permissoes;
 
 $perfil = new Perfil();
-$Permissoes = new Permissoes();
 $controller = new PerfilPermissaoController();
 $permitido = new UsuarioPermissaoController();
 
@@ -26,25 +24,10 @@ $body = json_decode(file_get_contents('php://input'), true);
 $permitido->autorizado();
 switch ($_SERVER["REQUEST_METHOD"]) {
     case "POST";
-        $Permissoes->setNome($body['nome']);
-        $permissaoController = new PermissaoController($Permissoes);
-        $resultado = $permissaoController->adicionarPermissao();
+        $perfil->setNome($body['nome']);
+        $perfilController = new PerfilController($perfil);
+        $resultado = $perfilController->adicionarPerfil();
         echo json_encode(['status' => $resultado]);
     break;
-    case "GET":
-        $resultado = $controller->listarPermissoes();
-        if (!$resultado) {
-            echo json_encode(["status" => false, "mensagem" => "Nenhuma Permissoes encontrado"]);
-            exit;
-        } else {
-            echo json_encode($resultado);
-            exit;
-        }     
-        
-        break;
-        
-
-    case "DELETE":
-        
-        break;
+    
 }

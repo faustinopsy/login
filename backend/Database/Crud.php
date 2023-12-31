@@ -124,13 +124,13 @@ public function listarTodasPermissoes()
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
-public function cadPermissao($permissao)
+public function cadPermissao($Permissoes)
 {
     $query = "
         INSERT INTO permissoes (nome) VALUES (:nome)
     ";
     $stmt = $this->conn->prepare($query);
-    $stmt->bindParam(":nome", $permissao);
+    $stmt->bindParam(":nome", $Permissoes);
     return $stmt->execute();
 }
 public function associar($perfilId, $permissaoId)
@@ -154,13 +154,13 @@ public function desassociar($perfilId, $permissaoId)
     $stmt->bindParam(":permissao_id", $permissaoId);
     return $stmt->execute();
 }
-public function listarPermissao($permissao)
+public function listarPermissao($Permissoes)
 {
     $query = "
-    SELECT id FROM permissoes where nome=:permissao
+    SELECT id FROM permissoes where nome=:Permissoes
     ";
     $stmt = $this->conn->prepare($query);
-    $stmt->bindParam(":permissao", $permissao);
+    $stmt->bindParam(":Permissoes", $Permissoes);
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }

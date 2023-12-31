@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", function() {
       return await response.json();
   }
   async function getListaPermissoes() {
-    const response = await fetch('backend/Router/Permissao', {
+    const response = await fetch('backend/Router/PermissaoRouter.php', {
         method: 'GET',
         headers: {
             'Authorization':  token,
@@ -31,11 +31,10 @@ async function populateDropdown() {
         selectElem.appendChild(optionElem);
     });
 }
-
 populateDropdown();
 
   async function addPermissao(perfilId, permissaoName) {
-      const response = await fetch(`backend/Router/Permissao`, {
+      const response = await fetch(`backend/Router/PerfilPermissaoRouter.php`, {
           method: 'POST',
           headers: {
                'Authorization':  token,
@@ -47,7 +46,7 @@ populateDropdown();
   }
 
   async function deletePermissao(perfilId, permissaoName) {
-      const response = await fetch(`backend/Router/Permissao/${perfilId}`, {
+      const response = await fetch(`backend/Router/PerfilPermissaoRouter.php?perfilId=${perfilId}`, {
           method: 'DELETE',
           headers: {
               'Authorization':  token,
@@ -59,7 +58,7 @@ populateDropdown();
   }
 
   async function getPermissoes(perfilId) {
-    const response = await fetch(`backend/Router/Permissao/${perfilId}`, {
+    const response = await fetch(`backend/Router/PerfilPermissaoRouter.php?perfilId=${perfilId}`, {
         method: 'GET',
         headers: {
             'Authorization':  token,
@@ -141,18 +140,52 @@ populateDropdown();
           alert('Erro ao adicionar permissão.');
       }
   });
+  document.getElementById('addPerfilNova').addEventListener('click', async function() {
+    const nome = document.getElementById('novoPerfilNome').value;
+    fetch('backend/Router/PerfilRouter.php', {
+      method: 'POST',
+      headers: {
+        'Authorization': token,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ nome: nome })
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.status) {
+        alert('Perfil adicionado com sucesso!');
+        populatePerfis();
+        populateDropdown();
+        document.getElementById('addPerfilModal').style.display='none';
+      } else {
+        alert('Erro ao adicionar perfil.');
+      }
+    });
+});
 
-
-//   document.getElementById('removePermissaoBtn').addEventListener('click', async function() {
-//       const perfilId = document.getElementById('perfilSelect').value;
-//       const permissaoName = document.getElementById('permissaoInput').value;
-
-//       const result = await deletePermissao(perfilId, permissaoName);
-//       if (result.status) {
-//           alert('Permissão removida com sucesso!');
-//       } else {
-//           alert('Erro ao remover permissão.');
-//       }
-//   });
+document.getElementById('addPermissaoNova').addEventListener('click', async function() {
+  const nome = document.getElementById('novaPermissaoNome').value;
+  fetch('backend/Router/PermissaoRouter.php', {
+    method: 'POST',
+    headers: {
+      'Authorization': token,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ nome: nome })
+  })
+  .then(response => response.json())
+  .then(data => {
+    if (data.status) {
+      alert('Permissão adicionada com sucesso!');
+      populatePerfis();
+      populateDropdown();
+      document.getElementById('addPermissaoModal').style.display='none';
+    } else {
+      alert('Erro ao adicionar permissão.');
+    }
+  });
+});
+  
+ 
  
 });

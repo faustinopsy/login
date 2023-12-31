@@ -50,4 +50,10 @@ switch($_SERVER["REQUEST_METHOD"]){
         }
     
     break;  
+    case "DELETE";
+        $usuario->setEmail($body['email']);
+        $usuariosController = new UsuarioController($usuario);
+        $resultado = $usuariosController->removerUsuario();
+        echo json_encode(['status' => $resultado]);
+    break;
 }

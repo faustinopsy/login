@@ -1,6 +1,5 @@
 document.getElementById('registrationForm').addEventListener('submit', function (e) {
     e.preventDefault();
-    const urlBase="http://localhost:8089/"
     const nome = document.getElementById('nome').value;
     const email = document.getElementById('email').value;
     const senha = document.getElementById('senha').value;

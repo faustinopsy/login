@@ -41,5 +41,6 @@ switch($_SERVER["REQUEST_METHOD"]){
             }
             echo json_encode($validationResponse);
             exit;
-            break; 
+        break; 
+
 }

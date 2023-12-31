@@ -6,9 +6,9 @@ require "../../vendor/autoload.php";
 
 use App\Controller\PerfilPermissaoController;
 use App\Model\Perfil;
-use App\Model\Permissao;
+use App\Model\Permissoes;
 $perfil = new Perfil();
-$permissao = new Permissao();
+$Permissoes = new Permissoes();
 
 header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: *');
@@ -24,7 +24,7 @@ $permissaoId = isset($body['permissaoId']) ? $body['permissaoId'] : '';
 $controller = new PerfilPermissaoController();
 switch ($_SERVER["REQUEST_METHOD"]) {
     case "POST":
-        $perfil->setId($perfilId);
+        $perfil->setId($body['perfilId']);
 
         $resultado = $controller->adicionarPermissao($perfil, $body['nome']);
         echo json_encode(['status' => $resultado]);

@@ -1,5 +1,5 @@
-CREATE DATABASE  IF NOT EXISTS `login` 
-USE `login`;
+CREATE DATABASE  IF NOT EXISTS `miniframeworkauth` ;
+USE `miniframeworkauth`;
 
 DROP TABLE IF EXISTS `perfil`;
 CREATE TABLE `perfil` (
@@ -7,18 +7,9 @@ CREATE TABLE `perfil` (
   `nome` varchar(50) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `nome` (`nome`)
-)
-
-
-DROP TABLE IF EXISTS `perfil_permissoes`;
-CREATE TABLE `perfil_permissoes` (
-  `perfilid` int NOT NULL,
-  `permissao_id` int NOT NULL,
-  PRIMARY KEY (`perfilid`,`permissao_id`),
-  KEY `perfil_permissoes_ibfk_2` (`permissao_id`),
-  CONSTRAINT `perfil_permissoes_ibfk_1` FOREIGN KEY (`perfilid`) REFERENCES `perfil` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `perfil_permissoes_ibfk_2` FOREIGN KEY (`permissao_id`) REFERENCES `permissoes` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-)
+);
+INSERT INTO `perfil`
+(`id`,`nome`)VALUES(2,'admin');
 
 DROP TABLE IF EXISTS `permissoes`;
 CREATE TABLE `permissoes` (
@@ -26,7 +17,9 @@ CREATE TABLE `permissoes` (
   `nome` varchar(100) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `nome` (`nome`)
-) 
+) ;
+INSERT INTO `permissoes`
+(`id`,`nome`)VALUES(1,'index');
 
 CREATE TABLE `usuario` (
   `id` int NOT NULL AUTO_INCREMENT,
@@ -38,13 +31,26 @@ CREATE TABLE `usuario` (
   UNIQUE KEY `email` (`email`),
   KEY `usuario_ibfk_1` (`perfilid`),
   CONSTRAINT `usuario_ibfk_1` FOREIGN KEY (`perfilid`) REFERENCES `perfil` (`id`)
-) 
-   
-CREATE  PROCEDURE `GetPermissoesPorPerfil`(IN perfilId INT)
+) ;
+DROP TABLE IF EXISTS `perfil_permissoes`;
+CREATE TABLE `perfil_permissoes` (
+  `perfilid` int NOT NULL,
+  `permissao_id` int NOT NULL,
+  PRIMARY KEY (`perfilid`,`permissao_id`),
+  KEY `perfil_permissoes_ibfk_2` (`permissao_id`),
+  CONSTRAINT `perfil_permissoes_ibfk_1` FOREIGN KEY (`perfilid`) REFERENCES `perfil` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `perfil_permissoes_ibfk_2` FOREIGN KEY (`permissao_id`) REFERENCES `permissoes` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+);
+INSERT INTO `perfil_permissoes`
+(`perfilid`,`permissao_id`)VALUES(2,1);
+DELIMITER $$
+
+CREATE PROCEDURE `GetPermissoesPorPerfil` (IN perfilId INT)
 BEGIN
     SELECT perm.nome 
     FROM permissoes perm
     JOIN perfil_permissoes pp ON perm.id = pp.permissao_id
     WHERE pp.perfilid = perfilId;
-END ;;
+END$$
+
 DELIMITER ;

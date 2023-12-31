@@ -6,16 +6,20 @@
     
     <title>Segunda Tela</title>
     <link rel="stylesheet" href="css/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/styleaTime.css">
     <script src="js/token.js"></script>
 </head>
 <body>
   
-  <div class="w3-bar w3-black" id="myDIV">
-    <a class="w3-bar-item  w3-button" href="index.html" data-tela="index">ADM</a>
-    <a class="w3-bar-item  w3-button" href="projetos.html" data-tela="projetos">Projetos</a>
-    <a class="w3-bar-item active  w3-button" href="pessoas.html" data-tela="pessoas">Equipe</a>
+  <div class="w3-sidebar w3-bar-block w3-black w3-xxlarge" style="width:70px">
+    <a href="index.html" class="w3-bar-item w3-button" data-tela="index"><i class="fa fa-globe"></i></a>
+    <a href="pessoas.html" data-tela="pessoas" class="w3-bar-item w3-button"><i class="fa fa-users"></i></a> 
   </div>
+  
+  <div style="margin-left:70px">
+  
+  <div class="w3-container">
   
   <div id="p1" class="w3-container tab" style="display:none">
     <h4>XXXXX</h4>
@@ -35,7 +39,7 @@
   
   <div id="p3" class="w3-container tab" >
     <h4>Equipe</h4>
-    <div id="time"></div> 
+    <div id="users"></div> 
   </div>
   
 
@@ -57,6 +61,6 @@
       </div>
 
       <script src="js/cards.js"></script>
-      <script src="js/times.js"></script>
+      <script src="js/getUsers.js"></script>
 </body>
 </html>
